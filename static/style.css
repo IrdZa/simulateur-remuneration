@@ -144,3 +144,14 @@ input:focus {
     font-weight: bold;
     color: #22c55e;
 }
+
+.checkbox-field {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-field input {
+    margin-right: 8px;
+    transform: scale(1.2);
+}

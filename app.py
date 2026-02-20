@@ -22,6 +22,7 @@ def index():
 
         annee = int(request.form["annee"])
         mois = int(request.form["mois"])
+	treizieme = request.form.get("treizieme")
         j_deb = int(request.form["jour_debut"])
         j_fin = int(request.form["jour_fin"])
 
@@ -65,6 +66,8 @@ def index():
                 m_maj = (heures_jour * TAUX) * (float(pourcent) / 100)
 
             total_final = m_base + m_nuit + m_maj + prime
+		if treizieme:
+    		total_final *= 2
 
             resultat = {
                 "base": round(m_base, 2),
@@ -72,6 +75,7 @@ def index():
                 "maj": round(m_maj, 2),
                 "prime": round(prime, 2),
                 "total": round(total_final, 2)
+		"treizieme": bool(treizieme)
             }
 
     return render_template(

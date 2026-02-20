@@ -28,6 +28,15 @@
                     <input type="number" name="annee" min="2020" max="2030"
        value="{{ form_data.get('annee', '') }}" required>
                 </div>
+		{% if form_data.get('mois') == '11' %}
+<div class="field checkbox-field">
+    <label>
+        <input type="checkbox" name="treizieme"
+               {% if form_data.get('treizieme') %}checked{% endif %}>
+        13ème mois
+    </label>
+</div>
+{% endif %}
 
                 <div class="field">
                     <label>Mois (1-12)</label>
