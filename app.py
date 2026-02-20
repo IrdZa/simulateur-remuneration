@@ -74,7 +74,12 @@ def index():
                 "total": round(total_final, 2)
             }
 
-    return render_template("index.html", calendrier=calendrier, resultat=resultat)
+    return render_template(
+    "index.html",
+    calendrier=calendrier,
+    resultat=resultat,
+    form_data=request.form
+)
 
 if __name__ == "__main__":
     app.run()

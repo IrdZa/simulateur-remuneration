@@ -25,22 +25,26 @@
 
                 <div class="field">
                     <label>Année (2020 – 2030)</label>
-                    <input type="number" name="annee" min="2020" max="2030" required>
+                    <input type="number" name="annee" min="2020" max="2030"
+       value="{{ form_data.get('annee', '') }}" required>
                 </div>
 
                 <div class="field">
                     <label>Mois (1-12)</label>
-                    <input type="number" name="mois" min="1" max="12" required>
+                    <input type="number" name="mois" min="1" max="12"
+       value="{{ form_data.get('mois', '') }}" required>
                 </div>
 
                 <div class="field">
                     <label>Jour début (mois précédent)</label>
-                    <input type="number" name="jour_debut" required>
+                    <input type="number" name="jour_debut"
+       value="{{ form_data.get('jour_debut', '') }}" required>
                 </div>
 
                 <div class="field">
                     <label>Jour fin</label>
-                    <input type="number" name="jour_fin" required>
+                    <input type="number" name="jour_fin"
+       value="{{ form_data.get('jour_fin', '') }}" required>
                 </div>
 
             </div>
