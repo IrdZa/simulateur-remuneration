@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulateur de Rémunération</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="main-title">Simulateur de Rémunération</h1>
+    <p class="subtitle">Estimation multi-années (2020 – 2030)</p>
+
+    <form method="POST">
+
+        <!-- SECTION PÉRIODE -->
+        <div class="card">
+            <h2>Période</h2>
+
+            <div class="periode-grid">
+
+                <div class="field">
+                    <label>Année (2020 – 2030)</label>
+                    <input type="number" name="annee" min="2020" max="2030" required>
+                </div>
+
+                <div class="field">
+                    <label>Mois (1-12)</label>
+                    <input type="number" name="mois" min="1" max="12" required>
+                </div>
+
+                <div class="field">
+                    <label>Jour début (mois précédent)</label>
+                    <input type="number" name="jour_debut" required>
+                </div>
+
+                <div class="field">
+                    <label>Jour fin</label>
+                    <input type="number" name="jour_fin" required>
+                </div>
+
+            </div>
+
+            <button type="submit" name="action" value="generer" class="btn">
+                Générer la période
+            </button>
+        </div>
+
+        {% if calendrier %}
+
+        <!-- HEURES PAR JOUR -->
+        <div class="card">
+            <h2>Heures par jour</h2>
+
+            <div class="grid-jours">
+                {% for jour in calendrier %}
+                <div class="field">
+                    <label>{{ jour }}</label>
+                    <input type="number" step="0.01" name="{{ jour }}" value="0">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- HEURES & PRIME -->
+        <div class="card">
+            <h2>Heures supplémentaires & Prime</h2>
+
+            <div class="grid-2">
+                <div class="field">
+                    <label>Heures après 21h</label>
+                    <input type="number" step="0.01" name="apres21" value="0">
+                </div>
+
+                <div class="field">
+                    <label>Prime</label>
+                    <input type="number" step="0.01" name="prime" value="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- MAJORATION -->
+        <div class="card">
+            <h2>Majoration spécifique</h2>
+
+            <div class="grid-2">
+                <div class="field">
+                    <label>Code jour (ex: dim08)</label>
+                    <input type="text" name="jour_maj">
+                </div>
+
+                <div class="field">
+                    <label>Majoration (%)</label>
+                    <input type="number" step="0.01" name="pourcentage">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" name="action" value="calculer" class="btn btn-success">
+            Calculer le salaire
+        </button>
+
+        {% endif %}
+
+    </form>
+
+    {% if resultat %}
+    <div class="result">
+        <h2>Résultat</h2>
+
+        <p>Salaire base : {{ resultat.base }} €</p>
+        <p>Bonus nuit : {{ resultat.nuit }} €</p>
+        <p>Majoration : {{ resultat.maj }} €</p>
+        <p>Prime : {{ resultat.prime }} €</p>
+
+        <hr>
+
+        <p class="total">TOTAL NET ESTIMÉ : {{ resultat.total }} €</p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
